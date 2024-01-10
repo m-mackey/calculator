@@ -1,3 +1,7 @@
+let num1;
+let num2;
+let operator;
+
 //basic calculations
 
 const add = (num1, num2) => num1 + num2;
