@@ -1,3 +1,4 @@
+//variables to be used later for output/display
 let num1;
 let num2;
 let operator;
@@ -15,7 +16,6 @@ const divide = (num1, num2) => num1 / num2;
 //operate function that uses above calc functions
 
 function operate(num1, num2, operator) {
-    //add check for divide by 0 before going further?
 
     switch (operator) {
         case '+':
@@ -25,7 +25,12 @@ function operate(num1, num2, operator) {
         case '*':
             return multiply(num1, num2);
         case '/':
-            return divide(num1, num2);
+            if (num2 === 0) {
+                console.log('error');
+                break;
+            } else {
+                return divide(num1, num2);
+            };
         default:
             console.log('not working???')
             break;
