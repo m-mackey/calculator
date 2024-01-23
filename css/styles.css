@@ -1,0 +1,33 @@
+.calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: repeat(6, 1fr);
+    background-color: aqua;
+    .calc-display{
+        background-color: orange;
+        grid-column: 1 / 5;
+    }
+    .operators {
+        display: grid;
+        grid-column: 1/ 5;
+        grid-row: 2 / 7;
+        background-color: blueviolet;
+        grid-template-columns: subgrid;
+        grid-template-rows: subgrid;
+        .right-side{
+            grid-row: 2 / 7;
+            grid-column: 4 / 5;
+            display: grid;
+            grid-template-columns: subgrid;
+            grid-template-rows: subgrid;
+        }
+    }
+    .numbers {
+    grid-row: 3 / 7;
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    }
+    
+}
