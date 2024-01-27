@@ -7,27 +7,40 @@
         background-color: orange;
         grid-column: 1 / 5;
     }
+    .backspace {
+        grid-column: 1 / 5;
+        grid-row: 2;
+    }
     .operators {
         display: grid;
         grid-column: 1/ 5;
-        grid-row: 2 / 7;
+        grid-row: 3 / 8;
         background-color: blueviolet;
         grid-template-columns: subgrid;
         grid-template-rows: subgrid;
         .right-side{
-            grid-row: 2 / 7;
+            grid-row: 1 / 8;
             grid-column: 4 / 5;
             display: grid;
             grid-template-columns: subgrid;
             grid-template-rows: subgrid;
+            .plus{
+                grid-row: 2 / 4;
+            }
+            .equal{
+                grid-row: 4 / 6;
+            }
         }
     }
     .numbers {
-    grid-row: 3 / 7;
+    grid-row: 4 / 8;
     grid-column: 1 / 4;
     display: grid;
     grid-template-columns: subgrid;
     grid-template-rows: subgrid;
+    .zero{
+        grid-column: 1 / 3;
+    }
     }
     
 }
