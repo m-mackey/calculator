@@ -2,6 +2,8 @@
 let num1;
 let num2;
 let operator;
+let display = document.querySelector('.calc-display');
+let currentDisplayNum = '';
 
 //basic calculations
 
@@ -34,4 +36,16 @@ function operate(num1, num2, operator) {
       console.log('not working???');
       break;
   }
+}
+
+//displays numbers click in display
+
+const nums = document.querySelectorAll('.number');
+nums.forEach((num) => {
+  num.addEventListener('click', onNumClick);
+});
+
+function onNumClick() {
+  currentDisplayNum += this.textContent;
+  display.textContent = currentDisplayNum; 
 }

@@ -1,3 +1,4 @@
+/* Layout of calculator and keys */
 .calculator {
     display: grid;
     grid-template-columns: repeat(4, 25%);
