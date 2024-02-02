@@ -4,6 +4,7 @@ let num2;
 let operator;
 let display = document.querySelector('.calc-display');
 let currentDisplayNum = '';
+const backspace = document.querySelector('.backspace')
 
 //basic calculations
 
@@ -49,3 +50,8 @@ function onNumClick() {
   currentDisplayNum += this.textContent;
   display.textContent = currentDisplayNum; 
 }
+
+backspace.addEventListener('click', () => {
+  currentDisplayNum = currentDisplayNum.slice(0, -1);
+  display.textContent = currentDisplayNum; 
+})
