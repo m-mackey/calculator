@@ -43,15 +43,32 @@ function operate(num1, num2, operator) {
 
 const nums = document.querySelectorAll('.number');
 nums.forEach((num) => {
-  num.addEventListener('click', onNumClick);
+  num.addEventListener('click', addNumToDisplay);
 });
 
-function onNumClick() {
+// adds the number button clicked to the current num displayed
+function addNumToDisplay() {
   currentDisplayNum += this.textContent;
   display.textContent = currentDisplayNum; 
+  toggleDecimalEvent(); //not sure if i like this here but it works
 }
 
+// removes last number from current number
 backspace.addEventListener('click', () => {
   currentDisplayNum = currentDisplayNum.slice(0, -1);
   display.textContent = currentDisplayNum; 
+  toggleDecimalEvent();
 })
+
+//remove/add click event to decimal based on if num includes one
+
+function toggleDecimalEvent() {
+  const decimal = document.querySelector('.decimal');
+  if (currentDisplayNum.includes('.')) {
+    decimal.removeEventListener('click', addNumToDisplay);
+    //maybe add something here that slighty changes color
+    //to indicate it can't be clicked?
+  } else {
+    decimal.addEventListener('click', addNumToDisplay);
+  } 
+}
