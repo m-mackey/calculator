@@ -4,7 +4,6 @@ let num2;
 let operator;
 let display = document.querySelector('.calc-display');
 let currentDisplayNum = '';
-const backspace = document.querySelector('.backspace')
 
 //basic calculations
 
@@ -54,6 +53,7 @@ function addNumToDisplay() {
 }
 
 // removes last number from current number
+const backspace = document.querySelector('.backspace')
 backspace.addEventListener('click', () => {
   currentDisplayNum = currentDisplayNum.slice(0, -1);
   display.textContent = currentDisplayNum; 
@@ -72,3 +72,11 @@ function toggleDecimalEvent() {
     decimal.addEventListener('click', addNumToDisplay);
   } 
 }
+
+//clear button
+const clearBtn = document.querySelector('.clear');
+clearBtn.addEventListener('click', () => {
+  currentDisplayNum = '';
+  display.textContent = '';
+  toggleDecimalEvent();
+})
