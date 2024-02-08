@@ -1,9 +1,7 @@
 //variables to be used later for output/display
-let num1;
-let num2;
-let operator;
+let num1, num2, operator;
 let display = document.querySelector('.calc-display');
-let currentDisplayNum = '';
+let displayedNum = '';
 
 //basic calculations
 
@@ -47,24 +45,24 @@ nums.forEach((num) => {
 
 // adds the number button clicked to the current num displayed
 function addNumToDisplay() {
-  currentDisplayNum += this.textContent;
-  display.textContent = currentDisplayNum; 
+  displayedNum += this.textContent;
+  display.textContent = displayedNum; 
   toggleDecimalEvent(); //not sure if i like this here but it works
 }
 
 // removes last number from current number
 const backspace = document.querySelector('.backspace')
 backspace.addEventListener('click', () => {
-  currentDisplayNum = currentDisplayNum.slice(0, -1);
-  display.textContent = currentDisplayNum; 
+  displayedNum = displayedNum.slice(0, -1);
+  display.textContent = displayedNum; 
   toggleDecimalEvent();
 })
 
 //remove/add click event to decimal based on if num includes one
-
+///move up
 function toggleDecimalEvent() {
   const decimal = document.querySelector('.decimal');
-  if (currentDisplayNum.includes('.')) {
+  if (displayedNum.includes('.')) {
     decimal.removeEventListener('click', addNumToDisplay);
     //maybe add something here that slighty changes color
     //to indicate it can't be clicked?
@@ -76,7 +74,7 @@ function toggleDecimalEvent() {
 //clear button
 const clearBtn = document.querySelector('.clear');
 clearBtn.addEventListener('click', () => {
-  currentDisplayNum = '';
+  displayedNum = '';
   display.textContent = '';
   toggleDecimalEvent();
 })
