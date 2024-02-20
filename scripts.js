@@ -15,7 +15,7 @@ const divide = (num1, num2) => num1 / num2;
 
 //operate function that uses above calc functions
 
-function operate(num1, num2, operator) {
+function operate(num1, num2, operator) { //change name of this function
   switch (operator) {
     case '+':
       return add(num1, num2);
@@ -77,4 +77,32 @@ clearBtn.addEventListener('click', () => {
   displayedNum = '';
   display.textContent = '';
   toggleDecimalEvent();
+  //also need to clear the array that holds the numbers
 })
+
+const operatorBtns = document.querySelectorAll('.operator');
+operatorBtns.forEach((operator) => {
+  operator.addEventListener('click', onOperatorClick);
+})
+
+let testArr = [];
+
+function onOperatorClick() { //prob needs a better name
+  //add check to see if arr is empty/right length? like if its the right length run the operation even if equals isn't clicked
+  testArr.push(displayedNum);
+  testArr.push(this.textContent); //but only need IF we don't have an operator already
+  //also need to add special cases if equal button is clicked
+  displayedNum = '';
+  console.log(testArr);
+  if (this.textContent === '=') {
+    runCalculation(testArr);
+  }
+}
+
+function runCalculation (testArr) {
+  const num1 = +testArr[0];  //+converts the string to a number, may change because its confusing to read? or just leave a comment
+  const operator = testArr[1];
+  const num2 = +testArr[2];
+  console.log(num1, num2, operator);
+  console.log(operate(num1, num2, operator));
+}
