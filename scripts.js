@@ -1,5 +1,4 @@
 //variables to be used later for output/display
-let num1, num2, operator;
 let display = document.querySelector('.calc-display');
 let displayedNum = '';
 
@@ -88,14 +87,26 @@ operatorBtns.forEach((operator) => {
 let testArr = [];
 
 function onOperatorClick() { //prob needs a better name
-  //add check to see if arr is empty/right length? like if its the right length run the operation even if equals isn't clicked
-  testArr.push(displayedNum);
-  testArr.push(this.textContent); //but only need IF we don't have an operator already
-  //also need to add special cases if equal button is clicked
-  displayedNum = '';
-  console.log(testArr);
+  
+
+  const numRegex = /[0-9]/; 
+
+  if (numRegex.test(displayedNum)) {
+    //the regex test just makes sure an empty string/string with just decimal isn't pushed, maybe there is a better way
+    testArr.push(displayedNum);
+    console.log(testArr);
+    if (testArr.length < 2) {
+      testArr.push(this.textContent);
+      console.log(testArr);
+    }
+    displayedNum = '';
+  }
+
   if (this.textContent === '=') {
-    runCalculation(testArr);
+    testArr.push(displayedNum);
+    display.textContent = runCalculation(testArr); //this is the result
+    console.log(displayedNum);
+    testArr.length = 0; //this empties array, but we need to save result if someone wants to continue calculations, and clear only when needed
   }
 }
 
@@ -105,4 +116,5 @@ function runCalculation (testArr) {
   const num2 = +testArr[2];
   console.log(num1, num2, operator);
   console.log(operate(num1, num2, operator));
+  return operate(num1, num2, operator);
 }
