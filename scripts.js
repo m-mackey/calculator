@@ -24,7 +24,7 @@ function operate(num1, num2, operator) { //change name of this function
       return multiply(num1, num2);
     case '/':
       if (num2 === 0) {
-        console.log('error');
+        console.log('error'); //add this to display
         break;
       } else {
         return divide(num1, num2);
@@ -88,6 +88,11 @@ let testArr = [];
 
 function onOperatorClick() { //prob needs a better name
   
+  const operatorRegex = /[+-/*]/
+  if (testArr.length === 2 && operatorRegex.test(this.textContent)) {
+    testArr[1] = this.textContent;
+    console.log(testArr)
+  }
 
   const numRegex = /[0-9]/; 
 
@@ -98,16 +103,18 @@ function onOperatorClick() { //prob needs a better name
     if (testArr.length < 2) {
       testArr.push(this.textContent);
       console.log(testArr);
+    } 
+
+    if (this.textContent === '=') { //only need this function if length of arr is 3
+      testArr.push(displayedNum);
+      display.textContent = runCalculation(testArr); //this is the result
+      console.log(displayedNum);
+      testArr.length = 0; //this empties array, but we need to save result if someone wants to continue calculations, and clear only when needed
     }
     displayedNum = '';
   }
 
-  if (this.textContent === '=') {
-    testArr.push(displayedNum);
-    display.textContent = runCalculation(testArr); //this is the result
-    console.log(displayedNum);
-    testArr.length = 0; //this empties array, but we need to save result if someone wants to continue calculations, and clear only when needed
-  }
+  
 }
 
 function runCalculation (testArr) {
