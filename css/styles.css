@@ -28,7 +28,7 @@
             .plus{
                 grid-row: 2 / 4;
             }
-            .equal{
+            .equals{
                 grid-row: 4 / 6;
             }
         }

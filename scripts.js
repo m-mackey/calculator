@@ -86,8 +86,10 @@ operatorBtns.forEach((operator) => {
 
 let testArr = [];
 
-function onOperatorClick() { //prob needs a better name
+function onOperatorClick() { //prob needs a better name, also maybe this fn is getting a little long
   
+  // This first check is to see if an operator has already been entered,
+  // and changes the operator if another is clicked before calculation is performed.
   const operatorRegex = /[+-/*]/
   if (testArr.length === 2 && operatorRegex.test(this.textContent)) {
     testArr[1] = this.textContent;
@@ -103,18 +105,26 @@ function onOperatorClick() { //prob needs a better name
     if (testArr.length < 2) {
       testArr.push(this.textContent);
       console.log(testArr);
-    } 
-
-    if (this.textContent === '=') { //only need this function if length of arr is 3
-      testArr.push(displayedNum);
-      display.textContent = runCalculation(testArr); //this is the result
-      console.log(displayedNum);
-      testArr.length = 0; //this empties array, but we need to save result if someone wants to continue calculations, and clear only when needed
+    }  else if (testArr.length > 2  && this.textContent === '=') {
+      console.log('test');
     }
     displayedNum = '';
   }
 
   
+}
+
+const equalBtn = document.querySelector('.equals');
+equalBtn.addEventListener('click', onEqualsClick);
+
+function onEqualsClick() {
+  if (testArr.length === 2 && /[0-9]/.test(displayedNum)) {
+    //this conditional makes sure that the first number and operator have been entered, and that the current input is a num
+    //can maybe change regex to built in method but some of those seem a little wonky, so research first
+    testArr.push(displayedNum);
+    display.textContent = runCalculation(testArr); //result of calc
+    testArr.length = 0; //this empties array, but we need to save result if someone wants to continue calculations, and clear only when needed
+  }
 }
 
 function runCalculation (testArr) {
