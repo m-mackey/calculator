@@ -90,28 +90,32 @@ function onOperatorClick() { //prob needs a better name, also maybe this fn is g
   
   // This first check is to see if an operator has already been entered,
   // and changes the operator if another is clicked before calculation is performed.
-  const operatorRegex = /[+-/*]/
-  if (testArr.length === 2 && operatorRegex.test(this.textContent)) {
+
+  if (testArr.length === 2) {
     testArr[1] = this.textContent;
     console.log(testArr)
   }
 
-  const numRegex = /[0-9]/; 
-
-  if (numRegex.test(displayedNum)) {
+  if (/[0-9]/.test(displayedNum)) {
     //the regex test just makes sure an empty string/string with just decimal isn't pushed, maybe there is a better way
     testArr.push(displayedNum);
     console.log(testArr);
     if (testArr.length < 2) {
       testArr.push(this.textContent);
       console.log(testArr);
-    }  else if (testArr.length > 2  && this.textContent === '=') {
-      console.log('test');
     }
     displayedNum = '';
   }
-
+  //redo this entire function so it works based on how long the arr is, starting for length is 0, <2, =2, etc
   
+  // if (/[0-9]/.test(displayedNum)) {
+  //   if (testArr.length = 0) {
+  //     testArr.push(displayedNum);
+  //     testArr.push(this.textContent);
+  //   } else if (testArr.length === 2) {
+  //     testArr[1] = this.textContent;
+  //   }
+  // }
 }
 
 const equalBtn = document.querySelector('.equals');
@@ -123,12 +127,15 @@ function onEqualsClick() {
     //can maybe change regex to built in method but some of those seem a little wonky, so research first
     testArr.push(displayedNum);
     display.textContent = runCalculation(testArr); //result of calc
-    testArr.length = 0; //this empties array, but we need to save result if someone wants to continue calculations, and clear only when needed
+    testArr.length = 0; //this empties array, but we need to save result if someone wants to continue calculations, and clear only when needed. maybe make result its own variable that clears when prompted
+  } else if (testArr.length === 3){
+    display.textContent = runCalculation(testArr);
+    testArr.length = 0; 
   }
 }
 
 function runCalculation (testArr) {
-  const num1 = +testArr[0];  //+converts the string to a number, may change because its confusing to read? or just leave a comment
+  const num1 = +testArr[0];  //+converts the string to a number
   const operator = testArr[1];
   const num2 = +testArr[2];
   console.log(num1, num2, operator);
