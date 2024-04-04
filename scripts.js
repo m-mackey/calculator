@@ -1,6 +1,7 @@
 //variables to be used later for output/display
 let display = document.querySelector('.calc-display');
 let displayedNum = '';
+let result;
 
 //basic calculations
 
@@ -106,16 +107,6 @@ function onOperatorClick() { //prob needs a better name, also maybe this fn is g
     }
     displayedNum = '';
   }
-  //redo this entire function so it works based on how long the arr is, starting for length is 0, <2, =2, etc
-  
-  // if (/[0-9]/.test(displayedNum)) {
-  //   if (testArr.length = 0) {
-  //     testArr.push(displayedNum);
-  //     testArr.push(this.textContent);
-  //   } else if (testArr.length === 2) {
-  //     testArr[1] = this.textContent;
-  //   }
-  // }
 }
 
 const equalBtn = document.querySelector('.equals');
@@ -126,10 +117,12 @@ function onEqualsClick() {
     //this conditional makes sure that the first number and operator have been entered, and that the current input is a num
     //can maybe change regex to built in method but some of those seem a little wonky, so research first
     testArr.push(displayedNum);
-    display.textContent = runCalculation(testArr); //result of calc
+    result = runCalculation(testArr);
+    display.textContent = result;
     testArr.length = 0; //this empties array, but we need to save result if someone wants to continue calculations, and clear only when needed. maybe make result its own variable that clears when prompted
   } else if (testArr.length === 3){
-    display.textContent = runCalculation(testArr);
+    result = runCalculation(testArr);
+    display.textContent = result;
     testArr.length = 0; 
   }
 }
