@@ -45,6 +45,10 @@ nums.forEach((num) => {
 
 // adds the number button clicked to the current num displayed
 function addNumToDisplay() {
+  if (result) {
+    result = '';
+    displayedNum = '';
+  }
   displayedNum += this.textContent;
   display.textContent = displayedNum; 
   toggleDecimalEvent(); //not sure if i like this here but it works
@@ -93,6 +97,9 @@ function onOperatorClick() { //prob needs a better name, also maybe this fn is g
   // and changes the operator if another is clicked before calculation is performed.
 
   if (testArr.length === 2) {
+    //something i could do instead is have an operator variable that gets assigned whatever operator is clicked, 
+    //but only actually uses that variable when other conditions are met. maybe jsut prevent it if there's no result
+    //or no calculation started at all. 
     testArr[1] = this.textContent;
     console.log(testArr)
   }
@@ -107,6 +114,8 @@ function onOperatorClick() { //prob needs a better name, also maybe this fn is g
     }
     displayedNum = '';
   }
+
+  //if (result) {assign result as first num of new calc}
 }
 
 const equalBtn = document.querySelector('.equals');
@@ -118,11 +127,16 @@ function onEqualsClick() {
     //can maybe change regex to built in method but some of those seem a little wonky, so research first
     testArr.push(displayedNum);
     result = runCalculation(testArr);
-    display.textContent = result;
+    displayedNum = result;
+    display.textContent = displayedNum; 
+
     testArr.length = 0; //this empties array, but we need to save result if someone wants to continue calculations, and clear only when needed. maybe make result its own variable that clears when prompted
   } else if (testArr.length === 3){
+    //currently if an operator is clicked before the equals with the last num in a calculation, the last num still gets pushed to the array.
+    //this at least makes sure calculations can continue.
     result = runCalculation(testArr);
-    display.textContent = result;
+    displayedNum = result;
+    display.textContent = displayedNum; 
     testArr.length = 0; 
   }
 }
