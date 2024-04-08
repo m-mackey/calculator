@@ -81,7 +81,7 @@ clearBtn.addEventListener('click', () => {
   displayedNum = '';
   display.textContent = '';
   toggleDecimalEvent();
-  //also need to clear the array that holds the numbers
+  testArr.length = 0;
 })
 
 const operatorBtns = document.querySelectorAll('.operator');
