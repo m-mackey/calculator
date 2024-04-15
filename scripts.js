@@ -1,7 +1,7 @@
 //variables to be used later for output/display
 let display = document.querySelector('.calc-display');
 let displayedNum = '';
-let result;
+// let result;
 
 //basic calculations
 
@@ -45,8 +45,9 @@ nums.forEach((num) => {
 
 // adds the number button clicked to the current num displayed
 function addNumToDisplay() {
-  if (result) {
-    result = '';
+  if (operationObj.result) {
+    clearObj(operationObj);
+    delete operationObj.result; //don't always want to delete result, so do it separately here
     displayedNum = '';
   }
   displayedNum += this.textContent;
@@ -81,7 +82,8 @@ clearBtn.addEventListener('click', () => {
   displayedNum = '';
   display.textContent = '';
   toggleDecimalEvent();
-  operationArr.length = 0;
+  clearObj(operationObj);
+  delete operationObj.result;
 })
 
 const operatorBtns = document.querySelectorAll('.operator');
@@ -89,31 +91,57 @@ operatorBtns.forEach((operator) => {
   operator.addEventListener('click', onOperatorClick);
 })
 
-let operationArr = [];
+let operationObj = {};
+
+function clearObj(obj){
+  delete obj.num1;
+  delete obj.num2;
+  delete obj.operator;
+}
 
 function onOperatorClick() { //prob needs a better name, also maybe this fn is getting a little long
   
-  // This first check is to see if an operator has already been entered,
-  // and changes the operator if another is clicked before calculation is performed.
-
-  if (operationArr.length === 2) {
-    //something i could do instead is have an operator variable that gets assigned whatever operator is clicked, 
-    //but only actually uses that variable when other conditions are met. maybe jsut prevent it if there's no result
-    //or no calculation started at all. 
-    operationArr[1] = this.textContent;
-    console.log(operationArr)
-  }
-
-  if (/[0-9]/.test(displayedNum)) {
-    //the regex test just makes sure an empty string/string with just decimal isn't pushed, maybe there is a better way
-    operationArr.push(displayedNum);
-    console.log(operationArr);
-    if (operationArr.length < 2) {
-      operationArr.push(this.textContent);
-      console.log(operationArr);
+  if(/[0-9]/.test(displayedNum) || typeof(displayedNum) === "number") {
+    for (let key in operationObj){
+      //for...in checks to see if there are any properties in the obj, if so it continues on with below
+      operationObj.num2 = displayedNum;
+      runCalculation(operationObj);
+      clearObj(operationObj);
     }
-    displayedNum = '';
+    //and if there are no properties, it continues on with the following:
+    operationObj.num1 = displayedNum;
+    operationObj.operator = this.textContent;
   }
+  
+  // if (/[0-9]/.test(displayedNum) || typeof(displayedNum) === "number") {
+  //   //the regex test just makes sure an empty string/string with just decimal isn't pushed, maybe there is a better way
+  //   // operationArr.push(displayedNum);
+  //   console.log(operationArr);
+  //   if (operationArr.length === 1) {
+  //     console.log('one');
+  //     operationArr.push(this.textContent);
+  //     operationArr.push(displayedNum);
+  //     console.log(operationArr);
+  //   } else if (operationArr.length < 2) {
+  //     operationArr.push(displayedNum);
+  //     // operationArr.push(displayedNum);
+  //     operationArr.push(this.textContent);
+  //     displayedNum = '';
+  //     console.log(operationArr);
+  //   } else if (operationArr.length === 2){
+  //     operationArr.push(displayedNum);
+  //     console.log(operationArr);
+  //     result = runCalculation(operationArr);
+  //     displayedNum = result;
+  //     display.textContent = displayedNum; 
+  //     operationArr[0] = result;
+  //   } else if (operationArr.length === 3) {
+  //     result = runCalculation(operationArr);
+  //     displayedNum = result;
+  //     display.textContent = displayedNum; 
+  //     console.log(operationArr);
+  //   }
+  displayedNum = '';
 
   //if (result) {assign result as first num of new calc}
 }
@@ -122,30 +150,22 @@ const equalBtn = document.querySelector('.equals');
 equalBtn.addEventListener('click', onEqualsClick);
 
 function onEqualsClick() {
-  if (operationArr.length === 2 && /[0-9]/.test(displayedNum)) {
-    //this conditional makes sure that the first number and operator have been entered, and that the current input is a num
-    //can maybe change regex to built in method but some of those seem a little wonky, so research first
-    operationArr.push(displayedNum);
-    result = runCalculation(operationArr);
-    displayedNum = result;
-    display.textContent = displayedNum; 
-
-    operationArr.length = 0; //this empties array, but we need to save result if someone wants to continue calculations, and clear only when needed. maybe make result its own variable that clears when prompted
-  } else if (operationArr.length === 3){
-    //currently if an operator is clicked before the equals with the last num in a calculation, the last num still gets pushed to the array.
-    //this at least makes sure calculations can continue.
-    result = runCalculation(operationArr);
-    displayedNum = result;
-    display.textContent = displayedNum; 
-    operationArr.length = 0; 
+  if (/[0-9]/.test(displayedNum)) {
+    operationObj.num2 = displayedNum;
+    runCalculation(operationObj);
+    // clearObj(operationObj);
   }
 }
 
-function runCalculation (operationArr) {
-  const num1 = +operationArr[0];  //+converts the string to a number
-  const operator = operationArr[1];
-  const num2 = +operationArr[2];
-  console.log(num1, num2, operator);
-  console.log(operate(num1, num2, operator));
-  return operate(num1, num2, operator);
+function runCalculation (operationObj) {
+  // const num1 = +operationArr[0];  //+converts the string to a number
+  // const operator = operationArr[1];
+  // const num2 = +operationArr[2];
+  // console.log(num1, num2, operator);
+  // console.log(operate(num1, num2, operator));
+  // operationArr.length = 0;
+  operationObj.result = (operate(+operationObj.num1, +operationObj.num2, operationObj.operator));
+  displayedNum = operationObj.result;
+  display.textContent = displayedNum;
+  // return operate(+operationObj.num1, +operationObj.num2, operationObj.operator);
 }
