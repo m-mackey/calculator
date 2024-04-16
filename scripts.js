@@ -1,7 +1,6 @@
 //variables to be used later for output/display
 let display = document.querySelector('.calc-display');
 let displayedNum = '';
-// let result;
 
 //basic calculations
 
@@ -45,14 +44,9 @@ nums.forEach((num) => {
 
 // adds the number button clicked to the current num displayed
 function addNumToDisplay() {
-  // if (operationObj.result) {
-  //   clearObj(operationObj);
-  //   delete operationObj.result; //don't always want to delete result, so do it separately here
-  //   displayedNum = '';
-  // }
   displayedNum += this.textContent;
   display.textContent = displayedNum; 
-  toggleDecimalEvent(); //not sure if i like this here but it works
+  toggleDecimalEvent(); 
 }
 
 // removes last number from current number
@@ -69,8 +63,6 @@ function toggleDecimalEvent() {
   const decimal = document.querySelector('.decimal');
   if (displayedNum.includes('.')) {
     decimal.removeEventListener('click', addNumToDisplay);
-    //maybe add something here that slighty changes color
-    //to indicate it can't be clicked?
   } else {
     decimal.addEventListener('click', addNumToDisplay);
   } 
@@ -100,7 +92,7 @@ function clearObj(obj){
   delete obj.result;
 }
 
-function onOperatorClick() { //prob needs a better name, also maybe this fn is getting a little long
+function onOperatorClick() {
   
   if(/[0-9]/.test(displayedNum) || typeof displayedNum === "number") {
     for (let key in operationObj){
@@ -109,41 +101,12 @@ function onOperatorClick() { //prob needs a better name, also maybe this fn is g
       runCalculation(operationObj);
       clearObj(operationObj);
       operationObj.num1 = operationObj.result;
-      ///next thing is to make result num 1, and maybe just delete or replace operator, delete num2
     }
     //and if there are no properties, it continues on with the following:
     operationObj.num1 = displayedNum;
     operationObj.operator = this.textContent;
   }
-  
-  // if (/[0-9]/.test(displayedNum) || typeof(displayedNum) === "number") {
-  //   //the regex test just makes sure an empty string/string with just decimal isn't pushed, maybe there is a better way
-  //   // operationArr.push(displayedNum);
-  //   console.log(operationArr);
-  //   if (operationArr.length === 1) {
-  //     console.log('one');
-  //     operationArr.push(this.textContent);
-  //     operationArr.push(displayedNum);
-  //     console.log(operationArr);
-  //   } else if (operationArr.length < 2) {
-  //     operationArr.push(displayedNum);
-  //     // operationArr.push(displayedNum);
-  //     operationArr.push(this.textContent);
-  //     displayedNum = '';
-  //     console.log(operationArr);
-  //   } else if (operationArr.length === 2){
-  //     operationArr.push(displayedNum);
-  //     console.log(operationArr);
-  //     result = runCalculation(operationArr);
-  //     displayedNum = result;
-  //     display.textContent = displayedNum; 
-  //     operationArr[0] = result;
-  //   } else if (operationArr.length === 3) {
-  //     result = runCalculation(operationArr);
-  //     displayedNum = result;
-  //     display.textContent = displayedNum; 
-  //     console.log(operationArr);
-  //   }
+
   displayedNum = '';
 
 }
@@ -162,16 +125,9 @@ function onEqualsClick() {
 }
 
 function runCalculation (operationObj) {
-  // const num1 = +operationArr[0];  //+converts the string to a number
-  // const operator = operationArr[1];
-  // const num2 = +operationArr[2];
-  // console.log(num1, num2, operator);
-  // console.log(operate(num1, num2, operator));
-  // operationArr.length = 0;
   operationObj.result = (operate(+operationObj.num1, +operationObj.num2, operationObj.operator));
   displayedNum = operationObj.result;
   console.log(displayedNum);
   console.log(typeof displayedNum);
   display.textContent = displayedNum;
-  // return operate(+operationObj.num1, +operationObj.num2, operationObj.operator);
 }
