@@ -45,11 +45,11 @@ nums.forEach((num) => {
 
 // adds the number button clicked to the current num displayed
 function addNumToDisplay() {
-  if (operationObj.result) {
-    clearObj(operationObj);
-    delete operationObj.result; //don't always want to delete result, so do it separately here
-    displayedNum = '';
-  }
+  // if (operationObj.result) {
+  //   clearObj(operationObj);
+  //   delete operationObj.result; //don't always want to delete result, so do it separately here
+  //   displayedNum = '';
+  // }
   displayedNum += this.textContent;
   display.textContent = displayedNum; 
   toggleDecimalEvent(); //not sure if i like this here but it works
@@ -97,16 +97,19 @@ function clearObj(obj){
   delete obj.num1;
   delete obj.num2;
   delete obj.operator;
+  delete obj.result;
 }
 
 function onOperatorClick() { //prob needs a better name, also maybe this fn is getting a little long
   
-  if(/[0-9]/.test(displayedNum) || typeof(displayedNum) === "number") {
+  if(/[0-9]/.test(displayedNum) || typeof displayedNum === "number") {
     for (let key in operationObj){
-      //for...in checks to see if there are any properties in the obj, if so it continues on with below
+      //for...in checks to see if there are any properties, in this case num1 and operator in the obj, if so it continues on with below
       operationObj.num2 = displayedNum;
       runCalculation(operationObj);
       clearObj(operationObj);
+      operationObj.num1 = operationObj.result;
+      ///next thing is to make result num 1, and maybe just delete or replace operator, delete num2
     }
     //and if there are no properties, it continues on with the following:
     operationObj.num1 = displayedNum;
@@ -143,18 +146,19 @@ function onOperatorClick() { //prob needs a better name, also maybe this fn is g
   //   }
   displayedNum = '';
 
-  //if (result) {assign result as first num of new calc}
 }
 
 const equalBtn = document.querySelector('.equals');
 equalBtn.addEventListener('click', onEqualsClick);
 
 function onEqualsClick() {
+  //need to add check to make sure have props in obj first before this runs
   if (/[0-9]/.test(displayedNum)) {
     operationObj.num2 = displayedNum;
     runCalculation(operationObj);
-    // clearObj(operationObj);
+    clearObj(operationObj);
   }
+  displayedNum = '';
 }
 
 function runCalculation (operationObj) {
@@ -166,6 +170,8 @@ function runCalculation (operationObj) {
   // operationArr.length = 0;
   operationObj.result = (operate(+operationObj.num1, +operationObj.num2, operationObj.operator));
   displayedNum = operationObj.result;
+  console.log(displayedNum);
+  console.log(typeof displayedNum);
   display.textContent = displayedNum;
   // return operate(+operationObj.num1, +operationObj.num2, operationObj.operator);
 }
