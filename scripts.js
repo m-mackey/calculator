@@ -100,7 +100,7 @@ function onOperatorClick() {
       operationObj.num2 = displayedNum;
       runCalculation(operationObj);
       clearObj(operationObj);
-      operationObj.num1 = operationObj.result;
+      // operationObj.num1 = operationObj.result;
     }
     //and if there are no properties, it continues on with the following:
     operationObj.num1 = displayedNum;
@@ -115,13 +115,16 @@ const equalBtn = document.querySelector('.equals');
 equalBtn.addEventListener('click', onEqualsClick);
 
 function onEqualsClick() {
-  //need to add check to make sure have props in obj first before this runs
-  if (/[0-9]/.test(displayedNum)) {
-    operationObj.num2 = displayedNum;
-    runCalculation(operationObj);
-    clearObj(operationObj);
+
+  if(operationObj.num1 && operationObj.operator) {
+    if (/[0-9]/.test(displayedNum)) {
+      operationObj.num2 = displayedNum;
+      runCalculation(operationObj);
+      clearObj(operationObj);
+    }
+    displayedNum = '';
   }
-  displayedNum = '';
+  
 }
 
 function runCalculation (operationObj) {
