@@ -24,7 +24,7 @@ function operate(num1, num2, operator) { //change name of this function
       return multiply(num1, num2);
     case '/':
       if (num2 === 0) {
-        console.log('error'); //add this to display
+        display.textContent = 'ERROR';
         break;
       } else {
         return divide(num1, num2);
@@ -99,7 +99,6 @@ function onOperatorClick() {
       operationObj.num2 = displayedNum;
       runCalculation(operationObj);
       clearObj(operationObj);
-      // operationObj.num1 = operationObj.result;
     }
     //and if there are no properties, it continues on with the following:
     operationObj.num1 = displayedNum;
@@ -128,8 +127,11 @@ function onEqualsClick() {
 
 function runCalculation (operationObj) {
   operationObj.result = (operate(+operationObj.num1, +operationObj.num2, operationObj.operator));
-  displayedNum = operationObj.result;
-  console.log(displayedNum);
-  console.log(typeof displayedNum);
-  display.textContent = displayedNum;
+  if(operationObj.result) {
+    //only does the following if there is a result,
+    //basically covers the case where user would divide by zero,
+    //in that case the ERROR message in the operate function is displayed instead.
+    displayedNum = operationObj.result;
+    display.textContent = displayedNum;
+  }
 }
