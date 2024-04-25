@@ -75,7 +75,6 @@ clearBtn.addEventListener('click', () => {
   display.textContent = '';
   toggleDecimalEvent();
   clearObj(operationObj);
-  delete operationObj.result;
 })
 
 const operatorBtns = document.querySelectorAll('.operator');
