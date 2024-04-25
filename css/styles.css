@@ -20,7 +20,7 @@
         grid-template-columns: subgrid;
         grid-template-rows: subgrid;
         .right-side{
-            grid-row: 1 / 8;
+            grid-row: 1 / 6;
             grid-column: 4 / 5;
             display: grid;
             grid-template-columns: subgrid;
