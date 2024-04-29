@@ -44,6 +44,7 @@ nums.forEach((num) => {
 
 // adds the number button clicked to the current num displayed
 function addNumToDisplay() {
+  //can set a hard limit on num of nums likw while displayednum is less than x
   displayedNum += this.textContent;
   display.textContent = displayedNum; 
   toggleDecimalEvent(); 
@@ -131,7 +132,17 @@ function runCalculation (operationObj) {
     //only does the following if there is a result,
     //basically covers the case where user would divide by zero,
     //in that case the ERROR message in the operate function is displayed instead.
+    const resultLengthCheck = operationObj.result.toString();
+    //just a way to check for long numbers and round them below if needed.
+    if (resultLengthCheck.length > 10) {
+      displayedNum = +operationObj.result.toFixed(2);
+      //per a stackoverflow answer, changing the string back to a number like this drops extra 0s
+      //https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+      //this method of rounding and others aren't without flaws but work for now.
+      display.textContent = displayedNum;
+    } else {
     displayedNum = operationObj.result;
     display.textContent = displayedNum;
+    }
   }
 }
