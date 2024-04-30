@@ -146,3 +146,12 @@ function runCalculation (operationObj) {
     }
   }
 }
+
+//keyboard support
+
+window.addEventListener('keydown', (e) => {
+  if (/[0-9]/.test(e.key)) {
+    displayedNum += e.key;
+    display.textContent = displayedNum; 
+  }
+})
