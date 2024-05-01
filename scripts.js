@@ -152,19 +152,23 @@ function runCalculation (operationObj) {
 }
 
 //keyboard support
+//the following is kinda long, but it works. if/else used because switch case would be longer.
+//there might be a better way to connect keyboard events to functions already used.
+//and to also add visual cues for key presses as well. 
 
 window.addEventListener('keydown', (e) => {
   if (/[0-9]/.test(e.key)) {
     displayedNum += e.key;
     display.textContent = displayedNum; 
-  //   //basically make a if else with the different buttons one might press
-  //  enter for equals? clear
   } else if (e.key === '.') {
     if (displayedNum.includes('.') === false) {
       displayedNum += e.key;
       display.textContent = displayedNum; 
     }
-  } else if (e.key === '='){
+  } else if (e.key === '=' || e.key === 'Enter'){
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
     onEqualsClick();
   } else if (e.key === 'Backspace') {
     backspaceEvent();
