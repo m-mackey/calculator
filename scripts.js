@@ -158,7 +158,7 @@ window.addEventListener('keydown', (e) => {
     displayedNum += e.key;
     display.textContent = displayedNum; 
   //   //basically make a if else with the different buttons one might press
-  //   //operators,  enter for equals? clear
+  //  enter for equals? clear
   } else if (e.key === '.') {
     if (displayedNum.includes('.') === false) {
       displayedNum += e.key;
@@ -170,5 +170,19 @@ window.addEventListener('keydown', (e) => {
     backspaceEvent();
   } else if (e.key === 'Escape'){
     clearInputs();
+  } else if (/[+-/*]/.test(e.key)){
+    if (e.key === '/') {
+      e.preventDefault();
+    }
+    if(/[0-9]/.test(displayedNum) || typeof displayedNum === "number") {
+      for (let key in operationObj){
+        operationObj.num2 = displayedNum;
+        runCalculation(operationObj);
+        clearObj(operationObj);
+      }
+      operationObj.num1 = displayedNum;
+      operationObj.operator = e.key;
+    }
+    displayedNum = '';
   }
 })
