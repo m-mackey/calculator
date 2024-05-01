@@ -73,12 +73,14 @@ function toggleDecimalEvent() {
 
 //clear button
 const clearBtn = document.querySelector('.clear');
-clearBtn.addEventListener('click', () => {
+clearBtn.addEventListener('click', clearInputs);
+
+function clearInputs() {
   displayedNum = '';
   display.textContent = '';
   toggleDecimalEvent();
   clearObj(operationObj);
-})
+}
 
 const operatorBtns = document.querySelectorAll('.operator');
 operatorBtns.forEach((operator) => {
@@ -156,7 +158,7 @@ window.addEventListener('keydown', (e) => {
     displayedNum += e.key;
     display.textContent = displayedNum; 
   //   //basically make a if else with the different buttons one might press
-  //   //operators,  enter for equals?
+  //   //operators,  enter for equals? clear
   } else if (e.key === '.') {
     if (displayedNum.includes('.') === false) {
       displayedNum += e.key;
@@ -166,5 +168,7 @@ window.addEventListener('keydown', (e) => {
     onEqualsClick();
   } else if (e.key === 'Backspace') {
     backspaceEvent();
-  } 
+  } else if (e.key === 'Escape'){
+    clearInputs();
+  }
 })
