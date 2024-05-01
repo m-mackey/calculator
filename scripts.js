@@ -153,5 +153,14 @@ window.addEventListener('keydown', (e) => {
   if (/[0-9]/.test(e.key)) {
     displayedNum += e.key;
     display.textContent = displayedNum; 
+  //   //basically make a switch case with the different buttons one might press
+  //   //operators, decimal, backspace, enter for equals? and also just the = button
+  } else if (e.key === '.') {
+    if (displayedNum.includes('.') === false) {
+      displayedNum += e.key;
+      display.textContent = displayedNum; 
+    }
+  // } else if (){
+    
   }
 })
