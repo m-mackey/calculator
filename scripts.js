@@ -52,11 +52,13 @@ function addNumToDisplay() {
 
 // removes last number from current number
 const backspace = document.querySelector('.backspace')
-backspace.addEventListener('click', () => {
+backspace.addEventListener('click', backspaceEvent);
+
+function backspaceEvent() {
   displayedNum = displayedNum.slice(0, -1);
   display.textContent = displayedNum; 
   toggleDecimalEvent();
-})
+}
 
 //remove/add click event to decimal based on if num includes one
 ///move up
@@ -154,7 +156,7 @@ window.addEventListener('keydown', (e) => {
     displayedNum += e.key;
     display.textContent = displayedNum; 
   //   //basically make a if else with the different buttons one might press
-  //   //operators, backspace, enter for equals?
+  //   //operators,  enter for equals?
   } else if (e.key === '.') {
     if (displayedNum.includes('.') === false) {
       displayedNum += e.key;
@@ -162,5 +164,7 @@ window.addEventListener('keydown', (e) => {
     }
   } else if (e.key === '='){
     onEqualsClick();
-  }
+  } else if (e.key === 'Backspace') {
+    backspaceEvent();
+  } 
 })
