@@ -192,7 +192,7 @@ window.addEventListener('keydown', (e) => {
 })
 
 //add/remove key highlight 
-
+//add
 window.addEventListener('keydown', (e) => {
   let test = document.querySelector(`button[data-key='${e.key}']`);
   if (test) {
@@ -202,7 +202,7 @@ window.addEventListener('keydown', (e) => {
   }
   
 })
-
+//remove
 window.addEventListener('keyup', (e) => {
   let test = document.querySelector(`button[data-key='${e.key}']`);
   if (test) {
