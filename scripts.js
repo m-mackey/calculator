@@ -190,3 +190,25 @@ window.addEventListener('keydown', (e) => {
     displayedNum = '';
   }
 })
+
+//add/remove key highlight 
+
+window.addEventListener('keydown', (e) => {
+  let test = document.querySelector(`button[data-key='${e.key}']`);
+  if (test) {
+    test.classList.add('pressed');
+  } else if (e.key === 'Enter') {
+    document.querySelector(`button[data-key='=']`).classList.add('pressed');
+  }
+  
+})
+
+window.addEventListener('keyup', (e) => {
+  let test = document.querySelector(`button[data-key='${e.key}']`);
+  if (test) {
+    test.classList.remove('pressed');
+  } else if (e.key === 'Enter') {
+    document.querySelector(`button[data-key='=']`).classList.remove('pressed');
+  }
+  
+})

@@ -45,3 +45,9 @@
     }
     
 }
+
+/* Visual Styles */
+
+.pressed {
+    background-color: blueviolet;
+}
