@@ -5,7 +5,7 @@
     display: grid;
     grid-template-columns: repeat(4, 25%);
     grid-template-rows: 1fr 5em repeat(5, 1fr);
-    background-color: aqua;
+    /* background-color: aqua; */
     .calc-display{
         background-color: orange;
         grid-column: 1 / 5;
@@ -21,7 +21,7 @@
         display: grid;
         grid-column: 1/ 5;
         grid-row: 3 / 8;
-        background-color: blueviolet;
+        /* background-color: blueviolet; */
         grid-template-columns: subgrid;
         grid-template-rows: subgrid;
         .right-side{
@@ -55,6 +55,7 @@
 
 button {
     border-radius: 0;
+    margin: 1px;
 }
 
 .backspace, 
