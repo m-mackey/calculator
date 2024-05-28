@@ -58,7 +58,7 @@ button {
 }
 
 .backspace, 
-.operators button {
+section.operators button {
     background-color: #d9d9d9;
 }
 
