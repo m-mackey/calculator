@@ -6,15 +6,18 @@
     grid-template-columns: repeat(4, 25%);
     grid-template-rows: 1fr 5em repeat(5, 1fr);
     background-color: #e5eaea;
+    font-size: xx-large;
     .calc-display{
         background-color: #fbd273;
         grid-column: 1 / 5;
-        text-align: right;
-        font-size: 3rem;
-        padding: 0.2em;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        font-size: xxx-large;
+        padding: 0 0.5rem 0 0.5rem;
     }
     .backspace {
         grid-column: 1 / 5;
