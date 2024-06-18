@@ -67,9 +67,14 @@ section.operators button {
     background-color: #d9d9d9;
 }
 
+button:hover,
+section.operators button:hover{
+    background-color: #D0D0D7;
+}
+
 .pressed,
 section.operators button.pressed {
     /* the more specific selector for the operator buttons is required to override
     the previous background color that was set. */
-    background-color: #d3a3ff;
+    background-color: #D0D0D7;
 }
