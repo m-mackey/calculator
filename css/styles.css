@@ -69,6 +69,9 @@
 button,
 section.operators button {
     margin: 1px;
+    &.pressed{
+        background-color: #D0D0D7;
+    }
     &:focus-visible{
         outline-color: #0060df;
     }
@@ -80,11 +83,4 @@ section.operators button {
 .backspace, 
 section.operators button {
     background-color: #d9d9d9;
-}
-
-.pressed,
-section.operators button.pressed {
-    /* the more specific selector for the operator buttons is required to override
-    the previous background color that was set. */
-    background-color: #D0D0D7;
 }
