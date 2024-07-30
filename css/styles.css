@@ -14,7 +14,7 @@
     grid-column: 1 / 5;
     grid-row: 1 / 2;
     white-space: nowrap;
-    overflow: hidden; /*this causes display to disappear when zoomed in a lot */
+    overflow: hidden; /*this causes display to disappear when zoomed in a lot (250%+) */
     text-overflow: ellipsis;
     display: flex;
     align-items: center;
